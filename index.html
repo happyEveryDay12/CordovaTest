@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <title>JS_Native_Interaction</title>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="cordova_plugins.js"></script>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript">
+            //      导航栏配置
+            //  显示导航栏
+            function hideNavigation() {
+                Cordova.exec(null, null, "SYNPlugin", "synCordovaPlugin", ["synjones.synpay.navigationbar.hide","1"]);
+            }
+        function showNavigation() {
+            Cordova.exec(null, null, "SYNPlugin", "synCordovaPlugin", ["synjones.synpay.navigationbar.hide","0"]);
+        }
+        //  配置导航栏背景色
+        function setNavigationBarColor() {
+            Cordova.exec(null, null, "SYNPlugin", "synCordovaPlugin", ["synjones.synpay.navigationbar.bg.color", "#8200CB"]);
+        }
+        //  恢复导航栏默认颜色
+        function reNavigationBarColor() {
+            Cordova.exec(null, null, "SYNPlugin", "synCordovaPlugin", ["synjones.synpay.navigationbar.bg.recolor"]);
+        }
+        //  设置导航栏标题
+        function setNavigationBarTitle() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.navigation.bar.title", "自定义标题"]);
+        }
+        //  恢复导航栏标题
+        function reNavigationBarTitle() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.navigation.bar.re.title"]);
+        }
+        //  设置导航栏右侧按钮
+        function setNavigationBarButton() {
+            Cordova.exec(rightButtonClicked,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.navigation.right.button", "刷新"]);
+        }
+        //  导航栏右侧按钮被点击
+        function rightButtonClicked() {
+            alert("点我干啥");
+        }
+        //  移除右侧按钮
+        function removeNavigationBarButton() {
+            Cordova.exec(rightButtonClicked,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.navigation.right.remove"]);
+        }
+        
+        //    获取设备信息
+        //  手机系统版本
+        function getSystemVersion() {
+            Cordova.exec(systemVersionSuccess,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.device.version"]);
+        }
+        function systemVersionSuccess(version) {
+            alert("手机系统版本:"+version);
+        }
+        //  手机类型
+        function getiPhoneType() {
+            Cordova.exec(deviceTypeSuccess,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.device.type"]);
+        }
+        function deviceTypeSuccess(iPhoneType) {
+            alert("手机类型:"+iPhoneType);
+        }
+        //  电池电量
+        function getBatteryLevel() {
+            Cordova.exec(batteryLevelSuccess,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.device.battery.level"]);
+        }
+        function batteryLevelSuccess(batteryLevel) {
+            alert("电池电量:"+batteryLevel);
+        }
+        //  获取设备名称
+        function getDeviceName() {
+            Cordova.exec(deviceNameSuccess,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.device.name"]);
+        }
+        function deviceNameSuccess(deviceName) {
+            alert("当前设备名称:"+deviceName);
+        }
+        //  获取设备串号
+        function getDeviceNumber() {
+            Cordova.exec(deviceNumberCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.device.number"]);
+        }
+        function deviceNumberCallBack(number) {
+            alert("当前设备串号:"+number);
+        }
+        //  获取当前语言环境
+        function getCurrentLanguage() {
+            Cordova.exec(languageCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.device.current.language"]);
+        }
+        function languageCallBack(status) {
+            alert("当前语言环境:"+status);
+        }
+        
+        //      获取App信息
+        //  App名称
+        function getAppName() {
+            Cordova.exec(appNameCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.app.name"]);
+        }
+        function appNameCallBack(appName) {
+            alert("应用名称:"+appName);
+        }
+        //  App版本
+        function getAppVersion() {
+            Cordova.exec(appVersionCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.app.version"]);
+        }
+        function appVersionCallBack(appVersion) {
+            alert("应用版本:"+appVersion);
+        }
+        //  App标识
+        function getAppBundleId() {
+            Cordova.exec(appBundleIdCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.app.bundle.identifier"]);
+        }
+        function appBundleIdCallBack(appBundleId) {
+            alert("应用标识:"+appBundleId);
+        }
+        //  屏幕宽度
+        function getAppBoundsWidth() {
+            Cordova.exec(boundsWidthCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.app.bounds.size.width"]);
+        }
+        function boundsWidthCallBack(boundsWidth) {
+            alert("屏幕宽度:"+boundsWidth);
+        }
+        //  屏幕高度
+        function getAppBoundsHeight() {
+            Cordova.exec(appBundleIdCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.app.bounds.size.height"]);
+        }
+        function boundsHeightCallBack(boundsHeight) {
+            alert("屏幕高度:"+boundsHeight);
+        }
+        
+        //    页面上下文
+        //  打开新页面
+        function pushWindow() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.window.push","http://www.synjones.com"]);
+        }
+        //  关闭当前页面
+        function popWindow() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.window.close.current"]);
+        }
+        //  关闭多级界面
+        function popToWindow() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.window.pop.to.index","2"]);
+        }
+        //  关闭当前应用
+        function exitApp() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.window.exit.app"]);
+        }
+        //  浏览器中打开
+        function openInBrowser() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.window.open.in.browser","http://www.synjones.com"]);
+        }
+        //  唤醒第三方App
+        function awakendApp() {
+            Cordova.exec(awakenSuccess,awakenFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.window.open.scheme","weixin://"]);
+        }
+        function awakenSuccess(status) {
+            alert("唤醒状态 : ", status);
+        }
+        function awakenFailed(error) {
+            alert(error);
+        }
+        
+        //    多媒体
+        //  打开相机
+        function callSysCamera() {
+            Cordova.exec(cameraCallBack,cameraFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.camera"]);
+        }
+        function cameraCallBack(imageData) {
+            document.getElementById("myImage").src = 'data:image/png;base64,'+imageData;
+        }
+        function cameraFailed(error) {
+            alert(error);
+        }
+        //  打开相册
+        function callSysAlbum() {
+            Cordova.exec(albumCallBack,albumFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.album"]);
+        }
+        function albumCallBack(imageData) {
+            document.getElementById("myImage").src = 'data:image/png;base64,'+imageData;
+        }
+        function albumFailed(error) {
+            alert(error);
+        }
+        //  图片保存到相册
+        function saveImage() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.save.image","http://www.xzxpay.com.cn/static/download/7a36f9c2-4fd6-42b2-bb68-d0b073519565.png"]);
+        }
+        //  文本阅读
+        function playSound() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.speech.utterance","收到123.00元"]);
+        }
+        //  蓝牙状态
+        function bluetoothState() {
+            Cordova.exec(bluetoothCallBack,bluetoothFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.bluetooth.state.changed"]);
+        }
+        function bluetoothCallBack(status) {
+            alert("蓝牙状态:"+ status);
+        }
+        function bluetoothFailed(error) {
+            alert(error);
+        }
+        //   扫描蓝牙设备
+        function scanForPeripherals() {
+            Cordova.exec(bluetoothCallBack,bluetoothFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.scan.peripherals","1"]);
+        }
+        function scanSuccessCallBack(peripherals) {
+            alert("设备列表:"+ peripherals);
+        }
+        function scanFailedCallBack(error) {
+            alert(error);
+        }
+        //   停止扫描
+        function scanForPeripherals() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.scan.peripherals","0"]);
+        }
+        //  链接蓝牙设备
+        function connectPripheral() {
+            Cordova.exec(pripheralCallBack,pripheralFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.connect.peripheral","PeriferalsName"]);
+        }
+        function pripheralCallBack(status) {
+            alert("设备链接状态:"+ status);
+        }
+        function pripheralFailed(error) {
+            alert(error);
+        }
+        //  向蓝牙设备发送数据
+        function sendDataToPripheral() {
+            Cordova.exec(sendCallBack,sendFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.system.send.data", "data"]);
+        }
+        function sendCallBack(status) {
+            alert("发送状态:"+status);
+        }
+        function sendFailed(error) {
+            alert(error);
+        }
+        
+        //    社会化分享
+        //  是否支持分享功能
+        function isOpenShare() {
+            Cordova.exec(openShareCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.share.is.open"]);
+        }
+        function openShareCallBack(status) {
+            alert("是否支持分享:"+status);
+        }
+        //  打开分享面板
+        function shareMessage() {
+            Cordova.exec(shareSuccess,shareFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.share.call", "标题","内容"," http://www.xzxpay.com.cn/static/download/c3cef059-ebe5-4b06-b0ee-5c452e687927.png ","http://www.synjones.com"]);
+        }
+        function shareSuccess(status) {
+            alert("分享状态:"+status);
+        }
+        function shareFailed(error) {
+            alert(error);
+        }
+        //  <p>GPS定位</p>
+        //  当前位置信息
+        function currentLocation() {
+            Cordova.exec(locationSuccess,locationFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.location.current"]);
+        }
+        function locationSuccess(locationInfo) {
+            document.getElementById("returnValue").value = "经度 : "+locationInfo.lat+"\n"+"纬度 : "+locationInfo.lon+"\n"+"位置 : "+locationInfo.name+"\n"+"国家 : "+locationInfo.country+"\n"+"省份 : "+locationInfo.area+"\n"+"城市: "+locationInfo.locality+"\n"+"市区: "+locationInfo.subLocality+"\n"+"街道 : "+locationInfo.thoroughfare+"\n"+"子街道(门牌号) : "+locationInfo.subThoroughfare;
+        }
+        function locationFailed(error) {
+            alert("locationFailed:"+error);
+        }
+        //  地图导航(终点名称)
+        function mapNavigationName() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.location.map.navigation","天安门"]);
+        }
+        //  地图导航(终点坐标)
+        function mapNavigationCoor() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.location.map.navigation","116.403972,39.915111"]);
+        }
+        //  开启持续定位
+        function startContinuousLocation() {
+            Cordova.exec(continuousSuccess,continuousFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.location.start.continuous"]);
+        }
+        function continuousSuccess(locationInfo) {
+            document.getElementById("returnValue").value = "lat : "+locationInfo.lat+"\n"+"lon : "+locationInfo.lon+"\n"+"count : "+count++;
+        }
+        function continuousFailed(error) {
+            alert(error);
+        }
+        //  关闭持续定位
+        function stopContinuousLocation() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.location.stop.continuous"]);
+            count = 1;
+            document.getElementById("returnValue").value = "持续定位已关闭";
+        }
+        
+        //  <p>工具</p>
+        //  增加屏幕亮度
+        function addBrightness() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.adjust.brightness","0.1"]);
+        }
+        //  降低屏幕亮度
+        function lowBrightness() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.adjust.brightness","-0.1"]);
+        }
+        //  恢复屏幕亮度
+        function reBrightness() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.adjust.brightness","0"]);
+        }
+        //  监听网络环境
+        function startMonitoring() {
+            Cordova.exec(networkCallBack,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.network.start.monitoring","1"]);
+        }
+        function networkCallBack(networkStatus) {
+            alert("当前网络转态:"+networkStatus);
+        }
+        //  停止监听网络
+        function stopMonitoring() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.network.start.monitoring","0"]);
+        }
+        //  打开扫一扫
+        function openScan() {
+            Cordova.exec(scanSuccess,scanFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.open.scan"]);
+        }
+        function scanSuccess(scanResult) {
+            alert("扫码结果 : "+scanResult);
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.window.push.window",scanResult]);
+        }
+        function scanFailed(error) {
+            alert(error);
+        }
+        //  开启闪光灯
+        function turnOnTorch() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.turnon/off.torch"]);
+        }
+        //  关闭闪光灯
+        function turnOffTorch() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.turnoff.torch"]);
+        }
+        //  打开设置中心
+        function openSetting() {
+            Cordova.exec(null,null,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.open.setting"]);
+        }
+        //  指纹解锁
+        function fingerprint() {
+            Cordova.exec(fingerprintSuccess,fingerprintFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.open.fingerprint"]);
+        }
+        function fingerprintSuccess(status) {
+            alert("验证状态:"+status);
+        }
+        function fingerprintFailed(error) {
+            alert(error);
+        }
+        //  截屏
+        function screenShot() {
+            Cordova.exec(shotSuccess,shotFailed,"SYNPlugin","synCordovaPlugin",["synjones.synpay.tool.screen.shot"]);
+        }
+        function shotSuccess(data) {
+            document.getElementById("myImage").src = 'data:image/png;base64,'+data;
+        }
+        function shotFailed(error) {
+            alert("shot error:"+error);
+        }
+        
+        function payPassword(pwd) {
+            alert("支付码:"+pwd);
+        }
+        </script>
+        
+    </head>
+    
+    <body>
+        <p>配置导航栏(7)</p>
+        <button onclick="hideNavigation()">             隐藏导航栏        </button>
+        <button onclick="showNavigation()">             显示导航栏        </button>
+        <button onclick="setNavigationBarColor()">      导航栏颜色        </button>
+        <button onclick="reNavigationBarColor()">       恢复默认颜色      </button>
+        <button onclick="setNavigationBarTitle()">      导航栏标题        </button>
+        <button onclick="reNavigationBarTitle()">       恢复导航标题      </button>
+        <button onclick="setNavigationBarButton()">     导航右侧按钮      </button>
+        <button onclick="removeNavigationBarButton()">  移除右侧按钮      </button>
+        
+        <p>获取设备信息(6)</p>
+        <button onclick="getSystemVersion()">           手机系统版本      </button>
+        <button onclick="getiPhoneType()">              手机类型         </button>
+        <button onclick="getBatteryLevel()">            电池电量         </button>
+        <button onclick="getDeviceName()">              设备名称         </button>
+        <button onclick="getDeviceNumber()">            设备串号         </button>
+        <button onclick="getCurrentLanguage()">         语言环境         </button>
+        
+        <p>获取App信息(5)</p>
+        <button onclick="getAppName()">                 App名称         </button>
+        <button onclick="getAppVersion()">              App版本         </button>
+        <button onclick="getAppBundleId()">             App标识         </button>
+        <button onclick="getAppBoundsWidth()">          屏幕宽度         </button>
+        <button onclick="getAppBoundsHeight()">         屏幕高度         </button>
+        
+        <p>页面上下文(6)</p>
+        <button onclick="pushWindow()">                 打开新页面       </button>
+        <button onclick="popWindow()">                  关闭当前页面      </button>
+        <button onclick="popToWindow()">                关闭2层页面      </button>
+        <button onclick="exitApp()">                    退出当前应用      </button>
+        <button onclick="openInBrowser()">              浏览器打开       </button>
+        <button onclick="awakendApp()">                 唤醒第三方App    </button>
+        
+        <p>多媒体(7)</p>
+        <button onclick="callSysCamera()">              系统相机         </button>
+        <button onclick="callSysAlbum()">               系统相册         </button>
+        <button onclick="saveImage()">                  图片保存到相册    </button>
+        <button onclick="playSound()">                  文本阅读         </button>
+        <button onclick="bluetoothState()">             蓝牙状态         </button>
+        <button onclick="scanForPeripherals()">         扫描蓝牙设备      </button>
+        <button onclick="connectPripheral()">           链接蓝牙设备      </button>
+        <button onclick="sendDataToPripheral()">        数据传输面       </button>
+        
+        <p>社会化分享(2)</p>
+        <button onclick="isOpenShare()">                是否支持分享功能  </button>
+        <button onclick="shareMessage()">               社会化分享       </button>
+        
+        <p>工具(5)</p>
+        <button onclick="addBrightness()">              增加屏幕亮度     </button>
+        <button onclick="lowBrightness()">              减小屏幕亮度     </button>
+        <button onclick="reBrightness()">                恢复屏幕亮度     </button>
+        <button onclick="openSetting()">                打开设置中心     </button>
+        <button onclick="openScan()">                   扫一扫          </button>
+        <button onclick="turnOnTorch()">                开启/关闭 闪光灯  </button>
+        <button onclick="fingerprint()">                指纹解锁        </button>
+        <button onclick="startMonitoring()">            监听网络环境     </button>
+        <button onclick="stopMonitoring()">             停止监听网络     </button>
+        <button onclick="screenShot()">                 截屏           </button>
+        
+        <p></p>
+        <div style="width: 50%;height: 50%;">
+            <image id="myImage" width = 100%>
+            </image>
+            <img style="display: block;width: 100%;height: 100%;" />
+        </div>
+        <p></p>
+        
+        <p>GPS定位(4)</p>
+        <button onclick="currentLocation()">            当前位置信息     </button>
+        <button onclick="mapNavigationName()">          地图导航(名称)    </button>
+        <button onclick="mapNavigationCoor()">          地图导航(坐标)    </button>
+        <button onclick="startContinuousLocation()">    持续定位        </button>
+        <button onclick="stopContinuousLocation()">     关闭持续定位     </button>
+        <p></p>
+        <textarea id ="returnValue" type="value" rows="10" cols="40">
+        </textarea>
+        
+    </body>
+    
+    
+    
+</html>
+
+
+
